@@ -12,6 +12,8 @@ All of the solutions are available in the repository, and [this video](https://y
 
 SQL Advanced Concepts from [this video](https://youtu.be/M-55BmjOuXY?si=K5VujeFhU_vlTzji) which cover all the advanced of SQL in 60 minutes.
 
+SQL Window Function(Advanced Concepts) from this videos [window function-1](https://youtu.be/Ww71knvhQ-s?si=5d6na5mulTyYRi16) and [window function-2](https://youtu.be/zAmJPdZu8Rg?si=02alYlmeVKGSfget) which cover all the window function of SQL in 60 minutes.
+
 ## Setup
 
 Install [MySQL](https://dev.mysql.com/downloads/mysql/) and [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) from the official website.
@@ -26,6 +28,8 @@ Copy the code inside the [schema.sql](schema.sql) file, paste it into MySQL Work
 For advanced concept, Copy the code inside the [mysqlsampledatabase.sql](mysqlsampledatabase.sql) file, paste it into MySQL Workbench, and run it. Where MySQL sample database ER diagram is like
 
 ![sample_DB](/images/sample_DB.png)
+
+For Window Function (advanced concept), Copy the code inside the [employeeCompanyA.sql](employeeCompanyA.sql) and [smartProduct.sql](smartProduct.sql) file, paste it into MySQL Workbench, and run it.
 
 ## Exercises
 ### 1. Create a Songs Table
