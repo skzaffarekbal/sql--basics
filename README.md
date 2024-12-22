@@ -5,9 +5,12 @@ For reference look this [Repository](https://github.com/WebDevSimplified/Learn-S
 
 There are two folder
 1. [Concept Folder](concepts) - Cover all the concept from the video.
-2. [Solution Folder](solutions) - All the solution of [`Exercise`](##Exercises).
+2. [Solution Folder](solutions) - All the solution of [`Exercise`](#Exercises).
+3. [Advanced Folder](advanced) - Cover all advanced concept.
 
 All of the solutions are available in the repository, and [this video](https://youtu.be/30W5wjgJR08) goes over all of the solutions.
+
+SQL Advanced Concepts from [this video](https://youtu.be/M-55BmjOuXY?si=K5VujeFhU_vlTzji) which cover all the advanced of SQL in 60 minutes.
 
 ## Setup
 
@@ -19,6 +22,10 @@ Install [MySQL](https://dev.mysql.com/downloads/mysql/) and [MySQL Workbench](ht
 First drop your existing database that was created in the tutorial. `DROP DATABASE record_company;`
 
 Copy the code inside the [schema.sql](schema.sql) file, paste it into MySQL Workbench, and run it. (This file contains the code necessary to create and add the tables from the tutorial video)
+
+For advanced concept, Copy the code inside the [mysqlsampledatabase.sql](mysqlsampledatabase.sql) file, paste it into MySQL Workbench, and run it. Where MySQL sample database ER diagram is like
+
+![sample_DB](/images/sample_DB.png)
 
 ## Exercises
 ### 1. Create a Songs Table
