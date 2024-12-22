@@ -152,6 +152,10 @@ NTILE(num_buckets) OVER (
   ORDER BY column_name
 )
 
+- num_buckets: The number of buckets to divide the rows into.
+- PARTITION BY: Divides the result set into partitions (optional).
+- ORDER BY: Determines the order in which rows are assigned to buckets.
+
 - NTILE() splits the rows evenly across buckets, ensuring as much balance as possible:
 - If the rows cannot be evenly divided, the buckets with fewer rows are placed at the end.
 - Each bucket is assigned a number from 1 to num_buckets.
@@ -191,3 +195,111 @@ SELECT p.product_category AS category,
 FROM (SELECT * ,
 	NTILE(3) OVER(PARTITION BY product_category ORDER BY price DESC) AS bucket
 FROM smartProduct) AS p;
+
+
+
+/* CUME_DIST() Window Function */
+
+/*
+- The CUME_DIST() (Cumulative Distribution) window function in SQL calculates the relative position of a row within a result set or partition as a cumulative distribution, representing the proportion of rows with values less than or equal to the current row.
+
+Syntax:
+CUME_DIST() OVER (
+  PARTITION BY column_name
+  ORDER BY column_name
+)
+
+- PARTITION BY: Divides the result set into partitions (optional).
+- ORDER BY: Specifies the order for calculating cumulative distribution.
+
+How It Works:
+Formula:
+
+CUME_DIST = (Number of rows with values less than or equal to the current row)/(Total number of rows in the partition)
+​
+Returns a value between 0 and 1:
+
+0: Before the first row.
+1: At or after the last row.
+
+
+Key Notes:
+- Cumulative: It includes all rows up to and including the current row in the calculation.
+- Ties: Rows with the same value (ties) receive the same cumulative distribution value.
+- Partitioning: If PARTITION BY is specified, CUME_DIST() resets for each partition.
+- Use Case: Useful for identifying percentiles or analyzing data distributions.
+*/
+
+SELECT *,
+	CUME_DIST() OVER(ORDER BY price DESC) AS CumeDistribution,
+	ROUND(CUME_DIST() OVER(ORDER BY price DESC) * 100, 2) AS CumeDistPer
+FROM smartProduct;
+
+-- Q.9 Query to fetch all products which are constituting the first 30% of the data in product table based on price
+
+SELECT p.product_category AS category,
+	p.brand AS brand,
+    p.product_name AS name,
+    p.price AS price,
+    p.CumeDistribution,
+    CONCAT(p.CumeDistPer, '%') AS CumeDistPercentage
+FROM (
+	SELECT *,
+		CUME_DIST() OVER(ORDER BY price DESC) AS CumeDistribution,
+		ROUND(CUME_DIST() OVER(ORDER BY price DESC) * 100, 2) AS CumeDistPer
+	FROM smartProduct
+) AS p
+WHERE p.CumeDistPer <= 30;
+
+
+
+
+
+/* PERCENT_RANK() Window Function */
+
+/*
+- The PERCENT_RANK() window function in SQL calculates the relative rank of a row within a result set as a percentage. The value returned by PERCENT_RANK() ranges from 0 to 1.
+
+Syntax:
+
+PERCENT_RANK() OVER (
+    PARTITION BY column_name
+    ORDER BY column_name
+)
+
+- PARTITION BY: Divides the result set into partitions for the calculation (optional).
+- ORDER BY: Specifies the column to determine the ranking order.
+
+How It Works:
+Formula:
+PERCENT_RANK = (Rank of current row−1) / (Total rows in partition−1)
+
+- The first row has a rank of 0, and the last row has a rank of 1 (if the partition has more than one row).
+- For a single-row partition, the value is always 0.
+
+Key Notes:
+
+- Relative Ranking: The percentage rank is relative to other rows in the partition.
+- Ties: Rows with the same value in the ORDER BY column have the same rank, and subsequent rows skip ranks.
+- Partitions: If PARTITION BY is used, the function calculates the rank independently for each partition.
+- Difference from CUME_DIST():
+PERCENT_RANK() starts at 0 and is based on rank.
+CUME_DIST() starts at 1/Total Rows and is cumulative.
+*/
+
+SELECT *,
+	PERCENT_RANK() OVER(ORDER BY price) AS PercentDecimal,
+    ROUND(PERCENT_RANK() OVER(ORDER BY price) * 100, 2) AS PercentRank
+FROM smartProduct;
+
+-- Q.10 Query to identify how much percentage more expensive is 'Galaxy Z Fold 3' when compare to all Product.
+
+SELECT product_name,
+	PercentRank
+FROM (
+	SELECT *,
+		PERCENT_RANK() OVER(ORDER BY price) AS PercentDecimal,
+		ROUND(PERCENT_RANK() OVER(ORDER BY price) * 100, 2) AS PercentRank
+	FROM smartProduct
+) p
+WHERE p.product_name = 'Galaxy Z Fold 3';
