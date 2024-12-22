@@ -8,7 +8,7 @@ Insert data from employeeCompanyA.sql file
 */
 
 /*
-1) Partition By Similar to Group By but it use in OVER clause in window function.
+1) Partition By is Similar to Group By but it use in OVER clause in window function.
 2) Can use Order By clause inside OVER clause in window function.
 3) DENSE_RANK() does not leave gaps in ranking after ties, while RANK() leaves gaps in the ranking sequence.
 4) LEAD(): Retrieves the value of a specified column from the next row in the window.
