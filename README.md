@@ -3,7 +3,7 @@
 SQL Basic concepts from [this video](https://youtu.be/p3qvj9hO_Bo) which cover all the basics of SQL in 60 minutes.
 For reference look this [Repository](https://github.com/WebDevSimplified/Learn-SQL)
 
-There are two folder
+There are three folder
 1. [Concept Folder](concepts) - Cover all the concept from the video.
 2. [Solution Folder](solutions) - All the solution of [`Exercise`](#Exercises).
 3. [Advanced Folder](advanced) - Cover all advanced concept.

@@ -7,6 +7,16 @@
 Insert data from employeeCompanyA.sql file
 */
 
+/*
+1) Partition By Similar to Group By but it use in OVER clause in window function.
+2) Can use Order By clause inside OVER clause in window function.
+3) DENSE_RANK() does not leave gaps in ranking after ties, while RANK() leaves gaps in the ranking sequence.
+4) LEAD(): Retrieves the value of a specified column from the next row in the window.
+   LAG(): Retrieves the value of a specified column from the previous row in the window.
+5) LEAD(): LEAD(column_name, offset, default_value) OVER (PARTITION BY column_name ORDER BY column_name)
+  LAG(): LAG(column_name, offset, default_value) OVER (PARTITION BY column_name ORDER BY column_name)
+*/
+
 SELECT * FROM employeeCompanyA;
 
 -- Max salary earn by employeeCompanyA
@@ -21,6 +31,11 @@ WHERE salary = (SELECT MAX(salary) FROM employeeCompanyA);
 SELECT dept_name, MAX(salary) AS max_salary
 FROM employeeCompanyA
 GROUP BY dept_name;
+
+-- Max Salary of the table with other details (Only possible with window function)
+SELECT a.*,
+	MAX(a.salary) OVER() AS max_salary
+FROM employeeCompanyA AS a;
 
 -- Max Salary of each department with other details (Only possible with window function)
 SELECT a.*,
@@ -37,6 +52,10 @@ FROM employeeCompanyA AS a;
 
 -- b) Assign unique row number to each employee as per department
 SELECT ROW_NUMBER() OVER(PARTITION BY a.dept_name) AS SN_dept,
+	a.*
+FROM employeeCompanyA AS a;
+
+SELECT ROW_NUMBER() OVER(PARTITION BY dept_name ORDER BY emp_id) AS rn,
 	a.*
 FROM employeeCompanyA AS a;
 
@@ -85,5 +104,5 @@ SELECT a.*,
 		WHEN a.salary > LAG(salary, 1, 0) OVER(PARTITION BY dept_name ORDER BY emp_ID) THEN 'Higher than Prev Employee'
 		WHEN a.salary < LAG(salary, 1, 0) OVER(PARTITION BY dept_name ORDER BY emp_ID) THEN 'Lower than Prev Employee'
         WHEN a.salary = LAG(salary, 1, 0) OVER(PARTITION BY dept_name ORDER BY emp_ID) THEN 'Equal with Prev Employee'
-        END AS sal_range
+    END AS sal_range
 FROM employeeCompanyA AS a;
