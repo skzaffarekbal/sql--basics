@@ -4,7 +4,7 @@
  ************** */
 
 /*
-Insert data from smartProduct.sql file
+Use classicmodels employees table
 */
 
 /*
