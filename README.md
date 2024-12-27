@@ -12,7 +12,7 @@ All of the solutions are available in the repository, and [this video](https://y
 
 SQL Advanced Concepts from [this video](https://youtu.be/M-55BmjOuXY?si=K5VujeFhU_vlTzji) which cover all the advanced of SQL in 60 minutes.
 
-SQL Window Function(Advanced Concepts) from this videos [window function-1](https://youtu.be/Ww71knvhQ-s?si=5d6na5mulTyYRi16) and [window function-2](https://youtu.be/zAmJPdZu8Rg?si=02alYlmeVKGSfget) which cover all the window function of SQL in 60 minutes.
+SQL Window Function(Advanced Concepts) from this videos [window function-1](https://youtu.be/Ww71knvhQ-s?si=5d6na5mulTyYRi16), [window function-2](https://youtu.be/zAmJPdZu8Rg?si=02alYlmeVKGSfget), [WITH Clause](https://youtu.be/QNfnuK-1YYY?si=0PTeLnK4iUd6TGXK), [Recursive Query](https://youtu.be/7hZYh9qXxe4?si=iEHTgFkc8S_hM7Se) which cover all the concept of SQL in 30-60 minutes.
 
 ## Setup
 
