@@ -83,6 +83,16 @@ FROM bands
 SELECT *
 FROM bands, albums;
 
+SELECT * 
+FROM songs, 
+	(SELECT avg(length) AS avgSongLength
+    FROM songs) avgSong;
+
+SELECT * 
+FROM songs 
+CROSS JOIN (SELECT avg(length) AS avgSongLength
+    FROM songs) avgSong;
+
 /*
 SELF JOIN : A self-join in SQL is when a table is joined with itself. This allows you to compare rows within the same table. It is often used to find relationships within hierarchical data or to compare rows in scenarios like finding duplicates or pairs.
 */
